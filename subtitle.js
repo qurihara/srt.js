@@ -1,3 +1,6 @@
+// Basic utility functions for srt.js
+// Kazutaka Kurihara @qurihara
+
 // Check for the various File API support.
 if (window.File && window.FileReader && window.FileList && window.Blob) {
 //alert('ok');
