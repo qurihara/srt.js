@@ -209,6 +209,7 @@ function confirmExtSub(){
       reader.onload = function(evt){
         //console.log(evt.target.result);
         parseSrt(evt.target.result);
+        disableDropper();
         // if(autoplay == "true") {
           // player.playVideo();
         // }
