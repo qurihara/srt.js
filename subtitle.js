@@ -16,7 +16,7 @@ var getUrlVars = function(){
         var key = '';
         if(keySearch != -1) key = param[i].slice(0, keySearch);
         var val = param[i].slice(param[i].indexOf('=', 0) + 1);
-        if(key != '') vars[key] = decodeURI(val);
+        if(key != '') vars[key] = decodeURIComponent(val);
     }
     return vars;
 }
@@ -44,7 +44,7 @@ function parseSrt(srt) {
     if (lines[i] == '')break;
     //lines[i] is a number
     // console.log(lines[i]);
-    i++;
+    i++; // index number can be any string.
     //lines[i] is a timespan
     var time = parseTimeSpan(lines[i]);
     sTimeList.push(time[0]);
@@ -70,16 +70,14 @@ function parseSrt(srt) {
 function parseTimeSpan(tm) {
   var t = tm.split(" --> ");
   var p1,p2;
-  console.log(tm);
-  if (t.length === 1){
+  if (t.length === 1){ // simplified timespan notation
     p1 = parseTime(t[0]);
     p2 = p1 + 100;
-  }else{
+  }else{ // normal timespan notation
     p1 = parseTime(t[0]);
     p2 = parseTime(t[1]);
   }
   var time = [p1,p2];
-  console.log(time);
   return time;
 }
 function parseTime(t){
