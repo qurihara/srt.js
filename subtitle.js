@@ -69,7 +69,17 @@ function parseSrt(srt) {
 }
 function parseTimeSpan(tm) {
   var t = tm.split(" --> ");
-  var time = [parseTime(t[0]), parseTime(t[1])];
+  var p1,p2;
+  console.log(tm);
+  if (t.length === 1){
+    p1 = parseTime(t[0]);
+    p2 = p1 + 100;
+  }else{
+    p1 = parseTime(t[0]);
+    p2 = parseTime(t[1]);
+  }
+  var time = [p1,p2];
+  console.log(time);
   return time;
 }
 function parseTime(t){
