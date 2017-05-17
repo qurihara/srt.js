@@ -111,7 +111,6 @@ function confirmExtSub(){
           }else{
             if (!hasSubtitle){
               // alert("no subtitle!");
-              getServerSub(url);
             }
           }
         }
@@ -146,30 +145,6 @@ function confirmExtSub(){
       };
       a.open("GET","https://www.youtube.com/api/timedtext?type=list&v="+b);
       a.send(null);
-
-  }
-
-  function getServerSub(url){
-    var a=new XMLHttpRequest(),b=url.match(/\?v=([-\w]{11})/)[1];
-    a.onreadystatechange=function()
-    {
-      if(a.readyState==4&&a.status==200)
-      {
-        //console.log(a);
-        var f=a.responseText;
-        parseSrt(f);
-        disableDropper();
-        // if(autoplay == "true") {
-          // player.playVideo();
-        // }
-      }else{
-        if(!hasSubtitle){
-          // alert("no subtitle!");
-        }
-      }
-    };
-    a.open("GET","https://2ff.azurewebsites.net/script/"+b + ".srt");
-    a.send(null);
 
   }
 
