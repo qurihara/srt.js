@@ -94,12 +94,12 @@ function onPlayerReady(event) {
 }
 
 function getSub(url) {
-  var a = new XMLHttpRequest();
-  var b = url.match(/\?v=([-\w]{11})/)[1];
-  a.onreadystatechange = function() {
-    if (a.readyState == 4 && a.status == 200) {
+  var httpRequest = new XMLHttpRequest();
+  var videoId = url.match(/\?v=([-\w]{11})/)[1];
+  httpRequest.onreadystatechange = function() {
+    if (httpRequest.readyState === 4 && httpRequest.status === 200) {
       // console.log(a.responseXML.documentElement);
-      var f = a.responseXML.documentElement.getElementsByTagName("track");
+      var f = httpRequest.responseXML.documentElement.getElementsByTagName("track");
       if (f.length) {
         var g = document.createElement("div");
         g.style.cssText = "padding:10px; background:white; border:1px solid #aaa;";
@@ -131,10 +131,10 @@ function getSub(url) {
     }
       
     function getFirstSub(i) {
-      a.onreadystatechange = function() {
-        if (a.readyState == 4 && a.status == 200) {
+      httpRequest.onreadystatechange = function() {
+        if (httpRequest.readyState === 4 && httpRequest.status === 200) {
           var j = "";
-          var l = a.responseXML.documentElement.getElementsByTagName("p");
+          var l = httpRequest.responseXML.documentElement.getElementsByTagName("p");
           for(var m = 0; m < l.length; m++){
             // console.log(l[m]);
             j += m + 1 + "\n";
@@ -156,12 +156,12 @@ function getSub(url) {
         var k = String(l + 1000).slice(-3);
         return o + ":" + j + ":" + n + "." + k;
       }
-      a.open("GET", "https://www.youtube.com/api/timedtext?fmt=srv3&lang=" + i.value + "&name=" + i.dataset.nm + "&v=" + b);
-      a.send(null);
+      httpRequest.open("GET", "https://www.youtube.com/api/timedtext?fmt=srv3&lang=" + i.value + "&name=" + i.dataset.nm + "&v=" + videoId);
+      httpRequest.send(null);
     }
   };
-  a.open("GET", "https://www.youtube.com/api/timedtext?type=list&v=" + b);
-  a.send(null);
+  httpRequest.open("GET", "https://www.youtube.com/api/timedtext?type=list&v=" + videoId);
+  httpRequest.send(null);
 }
 
 function disableDropper() {
