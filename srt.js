@@ -7,7 +7,7 @@ tag.src = "https://www.youtube.com/iframe_api";
 var firstScriptTag = document.getElementsByTagName("script")[0];
 firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
-function loadScript(filename,cb) {
+function loadScript(filename, cb) {
   var script = document.createElement("script");
   script.type = "text/javascript";
   script.src = filename;
@@ -104,16 +104,14 @@ function getSub(url) {
       var f = a.responseXML.documentElement.getElementsByTagName("track");
       if (f.length) {
         var g = document.createElement("div");
-        var e;
-        var d;
-        g.style.cssText = "padding:10px;background:white;border:1px solid #aaa;";
+        g.style.cssText = "padding:10px; background:white; border:1px solid #aaa;";
         g.onclick = function() {
           g.parentNode.removeChild(g);
         };
 
         var first = true;
-        for(e = 0; e < f.length; e++) {
-          d = document.createElement("button");
+        for(var e = 0; e < f.length; e++) {
+          var d = document.createElement("button");
           d.type = "button";
           d.innerHTML = f[e].getAttribute("lang_original");
           d.style.cssText = "margin:3px;";
@@ -137,11 +135,10 @@ function getSub(url) {
       
     function getFirstSub(i) {
       a.onreadystatechange = function() {
-        if(a.readyState == 4 && a.status == 200){
-          var j=""
-          var m;
+        if (a.readyState == 4 && a.status == 200) {
+          var j = ""
           var l = a.responseXML.documentElement.getElementsByTagName("p");
-          for(m = 0; m < l.length; m++){
+          for(var m = 0; m < l.length; m++){
             //console.log(l[m]);
             j += m + 1 + "\n";
             j += h(Number(l[m].getAttribute("t"))) + " --> " + h(Number(l[m].getAttribute("t")) + Number(l[m].getAttribute("d"))) + "\n";
@@ -220,7 +217,7 @@ function handleFileSelectSub(evt) {
 var timer;
 var state = -1;
 
-function checkRate(){
+function checkRate() {
   if (player.getPlayerState() == 1) {
     var cur = player.getCurrentTime();
     var newState = isInWhichSub(cur, 0);
