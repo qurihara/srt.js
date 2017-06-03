@@ -36,7 +36,7 @@ var INTERVAL = 50;
 var player;
 var autoplay = 0;
 var subUrl = "";
-var safer = "false";
+var saferMode = false;
 
 function onYouTubeIframeAPIReady() {
   var vid = "wJddRdcr3BE";
@@ -47,8 +47,8 @@ function onYouTubeIframeAPIReady() {
   if (para["autoplay"]) {
     autoplay = para["autoplay"];
   }
-  if (para["safer"]) {
-    safer = para["safer"];
+  if (para["safer"] && (para["safer"] === "true")) {
+    saferMode = true;
     console.log("safer eval mode");
   }
   if (para["surl"]) {
@@ -135,7 +135,7 @@ function getSub(url) {
     function getFirstSub(i) {
       a.onreadystatechange = function() {
         if (a.readyState == 4 && a.status == 200) {
-          var j = ""
+          var j = "";
           var l = a.responseXML.documentElement.getElementsByTagName("p");
           for(var m = 0; m < l.length; m++){
             // console.log(l[m]);
@@ -237,7 +237,7 @@ function action(state) {
   if (index in doOnce) {
     console.log("Multiple call: omitted.");
   } else {
-    if (safer == "true") {
+    if (saferMode === true) {
       console.log("safer evaluation:")
       evel(subList[state]);
     } else {
