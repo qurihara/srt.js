@@ -215,6 +215,45 @@ function confirmExtSub(){
       }
     }
   }
+
+  function initAlert(interpreter, scope) {
+      var wrapper = function(text) {
+        text = text ? text.toString() : '';
+        return interpreter.createPrimitive(alert(text));
+      };
+      interpreter.setProperty(scope, 'alert',
+          interpreter.createNativeFunction(wrapper));
+
+      var wrapper2 = function(href, callback) {
+        href = href ? href.toString() : '';
+        var req = new XMLHttpRequest();
+        req.open('GET', href, true);
+        req.onreadystatechange = function() {
+          if (req.readyState == 4 && req.status == 200) {
+            callback(interpreter.createPrimitive(req.responseText));
+          }
+        };
+        req.send(null);
+      };
+      interpreter.setProperty(scope, 'getXhr',
+        interpreter.createAsyncFunction(wrapper2));
+
+      var wrapper3 = function(text) {
+            text = text ? text.toString() : '';
+              return interpreter.createPrimitive(console.log(text));
+            };
+      interpreter.setProperty(scope, 'console_log',
+      interpreter.createNativeFunction(wrapper3));
+
+      // var wrapper4 = function(href, callback) {
+      //   href = href ? href.toString() : '';
+      //   loadScript(href,callback);
+      // };
+      // interpreter.setProperty(scope, 'loadScript',
+      //   interpreter.createAsyncFunction(wrapper4));
+
+  }
+
   function action(state){
     console.log(subList[state]);
     if (index in doOnce) {
@@ -222,7 +261,8 @@ function confirmExtSub(){
     }else{
       if (safer == "true"){
         console.log("safer evaluation:")
-        evel(subList[state]);
+        var myInterpreter = new Interpreter(subList[state],initAlert);
+        myInterpreter.run();
       }else{
         console.log("normal evaluation:")
         eval(subList[state]);
