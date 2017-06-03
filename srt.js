@@ -29,9 +29,7 @@ function indexedFunction(func) {
 }
 
 var index = "-1";
-var vars = {};
 var doOnce = {};
-var dulation;
 var INTERVAL = 50;
 var player;
 var autoplay = 0;
