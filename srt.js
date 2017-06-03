@@ -204,10 +204,10 @@ function handleFileSelectSub(evt) {
     // if (autoplay == "true") {
       // player.playVideo();
     // }
-  }
+  };
   reader.onerror = function(evt) {
     alert("Error ：" + evt.target.error.code);
-  }
+  };
 }
 
 
