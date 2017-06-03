@@ -138,7 +138,7 @@ function getSub(url) {
           for(var m = 0; m < l.length; m++){
             // console.log(l[m]);
             j += m + 1 + "\n";
-            j += h(Number(l[m].getAttribute("t"))) + " --> " + h(Number(l[m].getAttribute("t")) + Number(l[m].getAttribute("d"))) + "\n";
+            j += formatMilliseconds(Number(l[m].getAttribute("t"))) + " --> " + formatMilliseconds(Number(l[m].getAttribute("t")) + Number(l[m].getAttribute("d"))) + "\n";
             j += l[m].innerHTML + "\n\n";
           }
           parseSrt(j);
@@ -148,20 +148,20 @@ function getSub(url) {
           // }
         }
       };
-      
-      function h(l) {
-        var o = String(Math.floor(l / 3600000) + 100).substring(1);
-        var j = String(Math.floor((l - o * 3600000) / 60000) + 100).substring(1);
-        var n = String(Math.floor((l - o * 3600000 - j * 60000) / 1000) + 100).substring(1);
-        var k = String(l + 1000).slice(-3);
-        return o + ":" + j + ":" + n + "." + k;
-      }
       httpRequest.open("GET", "https://www.youtube.com/api/timedtext?fmt=srv3&lang=" + i.value + "&name=" + i.dataset.nm + "&v=" + videoId);
       httpRequest.send(null);
     }
   };
   httpRequest.open("GET", "https://www.youtube.com/api/timedtext?type=list&v=" + videoId);
   httpRequest.send(null);
+}
+
+function formatMilliseconds(millisec) {
+  var hours = String(Math.floor(millisec / 3600000) + 100).substring(1);
+  var min = String(Math.floor((millisec - hours * 3600000) / 60000) + 100).substring(1);
+  var sec = String(Math.floor((millisec - hours * 3600000 - min * 60000) / 1000) + 100).substring(1);
+  var millisec = String(millisec + 1000).slice(-3);
+  return (hours + ":" + min + ":" + sec + "." + millisec);
 }
 
 function disableDropper() {
