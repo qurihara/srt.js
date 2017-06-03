@@ -39,7 +39,7 @@ var subUrl = "";
 var safer = "false";
 
 function onYouTubeIframeAPIReady() {
-  var vid = "wJddRdcr3BE";//"7Qgif5_6_Gg";
+  var vid = "wJddRdcr3BE";
   var para = getUrlVars();
   if (para["v"]) {
     vid = para["v"];
@@ -60,7 +60,7 @@ function onYouTubeIframeAPIReady() {
     height: "390",
     width: "640",
     videoId: vid,
-    //playerVars: { "cc_load_policy": 1},// , "autoplay": autoplay},
+    // playerVars: { "cc_load_policy": 1},// , "autoplay": autoplay},
     events: {
       "onReady": onPlayerReady,
       "onStateChange": onPlayerStateChange
@@ -77,7 +77,7 @@ function confirmExtSub() {
 }
 
 function onPlayerReady(event) {
-  //event.target.playVideo();
+  // event.target.playVideo();
 
   console.log(event.target.getVideoUrl())
   console.log(event.target.getAvailablePlaybackRates());
@@ -100,7 +100,7 @@ function getSub(url) {
   var b = url.match(/\?v=([-\w]{11})/)[1];
   a.onreadystatechange = function() {
     if (a.readyState == 4 && a.status == 200) {
-      //console.log(a.responseXML.documentElement);
+      // console.log(a.responseXML.documentElement);
       var f = a.responseXML.documentElement.getElementsByTagName("track");
       if (f.length) {
         var g = document.createElement("div");
@@ -117,7 +117,6 @@ function getSub(url) {
           d.style.cssText = "margin:3px;";
           d.value = f[e].getAttribute("lang_code");
           d.dataset.nm = f[e].getAttribute("name");
-          //d.onclick = c;
           g.appendChild(d);
 
           if (first == true) {
@@ -125,7 +124,7 @@ function getSub(url) {
             getFirstSub(d);
           }
         }
-        //document.getElementById("ctrl").appendChild(g);
+        // document.getElementById("ctrl").appendChild(g);
       } else {
         if (!hasSubtitle) {
           // alert("no subtitle!");
@@ -139,7 +138,7 @@ function getSub(url) {
           var j = ""
           var l = a.responseXML.documentElement.getElementsByTagName("p");
           for(var m = 0; m < l.length; m++){
-            //console.log(l[m]);
+            // console.log(l[m]);
             j += m + 1 + "\n";
             j += h(Number(l[m].getAttribute("t"))) + " --> " + h(Number(l[m].getAttribute("t")) + Number(l[m].getAttribute("d"))) + "\n";
             j += l[m].innerHTML + "\n\n";
@@ -182,7 +181,7 @@ function onPlayerStateChange(event) {
     timer = setInterval("checkRate()", INTERVAL);
     done = true;
   } else {
-    //clearInterval(timer);
+    // clearInterval(timer);
   }
 }
 
@@ -201,10 +200,10 @@ function handleFileSelectSub(evt) {
   var reader = new FileReader();
   reader.readAsText(f, "utf-8");
   reader.onload = function(evt) {
-    //console.log(evt.target.result);
+    // console.log(evt.target.result);
     parseSrt(evt.target.result);
     disableDropper();
-    // if(autoplay == "true") {
+    // if (autoplay == "true") {
       // player.playVideo();
     // }
   }
