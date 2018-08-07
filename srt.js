@@ -67,18 +67,21 @@ function onYouTubeIframeAPIReady() {
 }
 
 function confirmExtSub() {
-  return confirm(
-    "公式配布されていないsrt.jsが指定されています。"
-    + "読み込んでもよろしいですか？任意のプログラムが実行されるリスクがあります。\n"
-    + "Can I load a third party srt.js?　It might be dangerous."
-  );
+  setTimeout(function(){
+    alert(
+      "公式配布されていないsrt.jsが指定されています。" +
+      "任意のプログラムが実行されるリスクがあります。注意してください。\n" +
+      "A third party srt.js was loaded.　It might be dangerous."
+    );
+    },500);
+  return true;
 }
 
 function onPlayerReady(event) {
   // event.target.playVideo();
 
   console.log(event.target.getVideoUrl())
-  console.log(event.target.getAvailablePlaybackRates());
+  //console.log(event.target.getAvailablePlaybackRates());
 
   if (subUrl === "") {
     getSub(event.target.getVideoUrl());
