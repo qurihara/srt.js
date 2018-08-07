@@ -35,6 +35,7 @@ var player;
 var autoplay = 0;
 var subUrl = "";
 var saferMode = false;
+var vars = {};
 
 function onYouTubeIframeAPIReady() {
   var vid = "wJddRdcr3BE";
