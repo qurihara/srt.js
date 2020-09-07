@@ -59,7 +59,11 @@ function onYouTubeIframeAPIReady() {
     height: "390",
     width: "640",
     videoId: vid,
-    // playerVars: { "cc_load_policy": 1},// , "autoplay": autoplay},
+    playerVars: {
+			// "cc_load_policy": 1,
+			// "autoplay": autoplay,
+			"playsinline": 1
+		},
     events: {
       "onReady": onPlayerReady,
       "onStateChange": onPlayerStateChange
